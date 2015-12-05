@@ -1,4 +1,3 @@
-<!-- http://www.SEOto.Work -->
 <?php
 defined('_VALID') or die('Restricted Access!');
 $config['db_type'] = 'mysql';

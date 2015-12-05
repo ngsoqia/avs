@@ -1,7 +1,8 @@
 <?php
 defined('_VALID') or die('Restricted Access!');
 
-define('DEBUG', false);
+// define('DEBUG', false);
+define('DEBUG', true);
 ini_set('display_errors', 0);
 if ( DEBUG ) {
     error_reporting(E_ALL);
