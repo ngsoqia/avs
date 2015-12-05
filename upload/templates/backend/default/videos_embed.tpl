@@ -3,7 +3,7 @@
         <div id="right">
         <div align="center">
         <div id="simpleForm">
-        <form name="embedVideo" method="POST" enctype="multipart/form-data" action="videos.php?m=embed">
+        <form name="embedVideo" method="POST" enctype="multipart/form-data" action="{$mediabaseurl}/h0utai/videos.php?m=embed">
         <fieldset>
         <legend>Embed Video</legend>            
             <label for="username">Username: </label>

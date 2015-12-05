@@ -31,6 +31,7 @@
 
     <script type="text/javascript">
     var base_url = "{$baseurl}";
+    var media_base_url = "{$mediabaseurl}";
 	var max_thumb_folders = "{$max_thumb_folders}";
     var tpl_url = "{$relative_tpl}";
 	{if isset($video.VID)}var video_id = "{$video.VID}";{/if}
@@ -42,7 +43,7 @@
 	var lang_share_rec_empty = "{t c='share.recipient'}";
 	</script>
 
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+	<script src="http://libs.baidu.com/jquery/1.11.1/jquery.min.js"></script>
 	
 	<link href="{$relative_tpl}/css/bootstrap.css" rel="stylesheet">
 	<link href="{$relative_tpl}/css/style.css" rel="stylesheet">

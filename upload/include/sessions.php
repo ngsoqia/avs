@@ -7,6 +7,7 @@ ini_set('session.use_only_cookies', 0);
 ini_set('session.gc_maxlifetime', intval($config['session_lifetime']));
 //session_set_cookie_params( 0, '/', '.yourdomain.com');
 if ( $config['session_driver'] == 'database' ) {
+// 	echo 'database ';
     require $config['BASE_DIR']. '/classes/session.class.php';
     ini_set('session.save_handler', 'user');
     session_set_save_handler(array('Session', 'open'),

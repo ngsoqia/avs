@@ -20,6 +20,7 @@ $smarty->assign('languages', $languages);
 
 $smarty->assign('bgcolor',      '#E8E8E8');
 $smarty->assign('baseurl',    $config['BASE_URL']);
+$smarty->assign('mediabaseurl',    $config['MEDIA_BASE_URL']);
 $smarty->assign('basedir',    $config['BASE_DIR']);
 $smarty->assign('relative',   $config['RELATIVE']);
 $smarty->assign('relative_tpl', $config['RELATIVE']. '/templates/' .$tpl_dir. '/' .$tpl);

@@ -6,6 +6,7 @@
     <link href="{$relative_tpl}/css/style_admin.css" type="text/css" rel="stylesheet">
     <script type="text/javascript">
     var base_url = '{$baseurl}';
+    var media_base_url = '{$mediabaseurl}';
     </script>
     <script type="text/javascript" src="{$relative_tpl}/js/jquery-1.2.6.pack.js"></script>
     <script type="text/javascript" src="{$relative_tpl}/js/jquery.corner.js"></script>

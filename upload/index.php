@@ -1,4 +1,3 @@
-<!-- http://www.SEOto.Work -->
 <?php
 define('_VALID', true);
 require 'include/config.php';

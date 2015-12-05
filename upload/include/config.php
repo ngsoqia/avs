@@ -1,5 +1,5 @@
-<!-- http://www.SEOto.Work -->
 <?php
+ob_start();
 defined('_VALID') or die('Restricted Access!');
 
 header("Expires: Tue, 03 Jul 2001 06:00:00 GMT");

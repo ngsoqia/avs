@@ -6,6 +6,7 @@ class Session
     private static $_sess_db;
 
     public static function open() {
+//     	echo 'open--'.$session_id.'; ';
         global $config;    
     
         if (self::$_sess_db = mysql_connect($config['db_host'], $config['db_user'], $config['db_pass'])) {
@@ -16,10 +17,13 @@ class Session
     }
 
     public static function close() {
+//     	echo 'close--'.$session_id.'; ';
+    	echo $session_id;
         return mysql_close(self::$_sess_db);
     }
 
     public static function read($session_id) {
+//     	echo 'read--'.$session_id.'; ';
         $sql = sprintf("SELECT `session_data` FROM `sessions` WHERE `session_id` = '%s'", mysql_real_escape_string($session_id));
         if ($result = mysql_query($sql, self::$_sess_db)) {
             if (mysql_num_rows($result)) {
@@ -33,6 +37,7 @@ class Session
 
     public static function write($session_id, $session_data)
     {
+    	echo 'write--'.$session_id.' : '.$session_data.'; ';
 	    $sql = sprintf("REPLACE INTO `sessions` VALUES('%s', '%s', '%s')", mysql_real_escape_string($session_id),
 						mysql_real_escape_string(time()), mysql_real_escape_string($session_data) );
 		
@@ -41,11 +46,13 @@ class Session
 
     public static function destroy( $session_id )
     {
+//     	echo 'destory--'.$session_id.'; ';
 	    $sql = sprintf("DELETE FROM `sessions` WHERE `session` = '%s'", $session_id);
 		return mysql_query($sql, self::$_sess_db);
 	}
     
     public static function gc($max) {
+//     	echo 'gc--'.$session_id.'; ';
 	    $sql = sprintf("DELETE FROM `sessions` WHERE `session_expires` < '%s'", mysql_real_escape_string(time() - $max));
 		return mysql_query($sql, self::$_sess_db);
 	}

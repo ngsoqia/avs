@@ -17,7 +17,8 @@
 </div>
 <script type="text/javascript">
 // <![CDATA[
-var so = new SWFObject("{$baseurl}/media/player/player.swf?f={$baseurl}/media/player/config.php?vkey={$video.VID}-{$new_permisions.watch_hd_videos}-{$new_permisions.in_player_ads}", "main", "100%", "100%", "9", "#000000");
+//var so = new SWFObject("{$baseurl}/media/player/player.swf?f={$baseurl}/media/player/config.php?vkey={$video.VID}-{$new_permisions.watch_hd_videos}-{$new_permisions.in_player_ads}", "main", "100%", "100%", "9", "#000000");
+  var so = new SWFObject("{$baseurl}/media/player/player.swf?f={$mediabaseurl}/media/player/config.php?vkey={$video.VID}-{$new_permisions.watch_hd_videos}-{$new_permisions.in_player_ads}", "main", "100%", "100%", "9", "#000000");
 so.addParam('allowfullscreen','true');
 so.addParam('allowscriptaccess','always');
 so.addParam('quality','high');

@@ -710,7 +710,8 @@ function insert_tmb_path($options)
 		$tmb_folder = 'tmb'.$index;
 	}
 
-	$output = $config['BASE_URL'].'/media/videos/'.$tmb_folder.'/'.$vid;
+// 	$output = $config['BASE_URL'].'/media/videos/'.$tmb_folder.'/'.$vid;
+	$output = $config['MEDIA_BASE_URL'].'/media/videos/'.$tmb_folder.'/'.$vid;
 
 	return $output;
 }

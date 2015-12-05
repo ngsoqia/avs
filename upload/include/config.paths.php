@@ -1,7 +1,8 @@
 <?php
 defined('_VALID') or die('Restricted Access!');
 $config = array();
-$config['BASE_URL'] = 'http://www.yourdomain.com';
+$config['BASE_URL'] = 'http://www.avs.com:8888';
+$config['MEDIA_BASE_URL'] = 'http://www.aishe.tv';
 $config['RELATIVE'] = '';
 $config['BASE_DIR'] = dirname(dirname(__FILE__));
 $config['TMP_DIR'] = $config['BASE_DIR']. '/tmp';

@@ -99,7 +99,7 @@
             <td width="30%" valign="top" align="center">
                 <h2>View Video</h2>
                 {if $video[0].embed_code == ''}
-				<embed src="{$baseurl}/media/player/player_adv.swf" width="300" height="220" allowscriptaccess="always" allowfullscreen="true" flashvars="height=220&width=300&file={if $video[0].flvdoname != ''}{$baseurl}/media/videos/flv/{$video[0].VID}.flv{else}{$baseurl}/media/videos/iphone/{$video[0].VID}.mp4{/if}&image={insert name=tmb_path vid=$video[0].VID}/{$video[0].thumb}.jpg&displayheight=220&searchbar=false" pluginspage="http://www.macromedia.com/go/getflashplayer" type="application/x-shockwave-flash" />
+				<embed src="{$baseurl}/media/player/player_adv.swf" width="300" height="220" allowscriptaccess="always" allowfullscreen="true" flashvars="height=220&width=300&file={if $video[0].flvdoname != ''}{$mediabaseurl}/media/videos/flv/{$video[0].VID}.flv{else}{$mediabaseurl}/media/videos/iphone/{$video[0].VID}.mp4{/if}&image={insert name=tmb_path vid=$video[0].VID}/{$video[0].thumb}.jpg&displayheight=220&searchbar=false" pluginspage="http://www.macromedia.com/go/getflashplayer" type="application/x-shockwave-flash" />
 				<br><br>
                 {else}
                 {$video[0].embed_code}

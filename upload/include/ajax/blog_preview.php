@@ -12,7 +12,7 @@ $preview[]  = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "h
 $preview[]  = '<html xmlns="http://www.w3.org/1999/xhtml">';
 $preview[]  = '<head>';
 $preview[]  = '<title>Blog Preview</title>';
-$preview[]  = '<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>';
+$preview[]  = '<script type="text/javascript" src="http://libs.baidu.com/jquery/1.11.1/jquery.min.js"></script>';
 $preview[]  = '<link rel = "stylesheet" href = "' .$config['BASE_URL']. '/templates/frontend/' .$config['template']. '/css/bootstrap.css" rel="stylesheet" />';
 $preview[]  = '<link rel = "stylesheet" href = "' .$config['BASE_URL']. '/templates/frontend/' .$config['template']. '/css/style.css" rel="stylesheet" />';
 $preview[]  = '<link rel = "stylesheet" href = "' .$config['BASE_URL']. '/templates/frontend/' .$config['template']. '/css/responsive.css" rel="stylesheet" />';
