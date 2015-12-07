@@ -27,7 +27,8 @@ function getUserQuery()
             'avatar' => 1,
             'prefs' => 1,
             'blocks' => 1,
-            'delete' => 1
+            'delete' => 1,
+        	'pay' => 1
         );
         
         if ( isset($modules_allowed[$module]) ) {
@@ -382,6 +383,17 @@ function deleteGame( $gid )
         @chmod($thumb, 0777);
         @unlink($thumb);
     }	
+}
+
+function getUserVipLevel($user){
+	if($user['vip_level'] && $user['vip_time']<time()){
+		return $user['vip_level'].' VIP';
+	}
+	if(intval($user['score'])<5000){
+		return "1 (普通)";
+	}else{
+		return "2 (普通)";
+	}
 }
 
 ?>

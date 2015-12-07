@@ -158,6 +158,11 @@ background-color: #fff;
 	color: #fff;
 }
 
+
+.text-red {
+	color: #f00;
+}
+
 /* Boxes on profile pages, blogs*/
 .panel {
 	border: none!important;

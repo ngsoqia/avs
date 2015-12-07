@@ -5,6 +5,7 @@ require 'include/function_global.php';
 require 'include/function_smarty.php';
 require 'classes/auth.class.php';
 require 'classes/email.class.php';
+require 'include/function_user.php';
 
 if (isset($new_permisions['upload_video'])) {
 	if ($new_permisions['upload_video'] == 0) {
@@ -26,6 +27,8 @@ $user       = $rs->getrows();
 $user       = $user['0'];
 $username   = $user['username'];
 $uid    = intval($user['UID']);
+
+$user['vip_level'] = getUserVipLevel($user);
 
 $sql        = "SELECT * FROM users_online WHERE UID = " .$uid. " AND online > " .(time()-300). " LIMIT 1";
 $rs     = $conn->execute($sql);

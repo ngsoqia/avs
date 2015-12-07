@@ -24,14 +24,18 @@ $user   = $rs->getrows();
 $user   = $user['0'];
 $uid    = intval($user['UID']);
 
+$user['vip_level'] = getUserVipLevel($user);
+
 $sql        = "SELECT * FROM users_online WHERE UID = " .$uid. " AND online > " .(time()-300). " LIMIT 1";
 $rs     = $conn->execute($sql);
 if ( $conn->Affected_Rows() == 1 )
 	$online = true;
 else
 	$online = false;
-
-if ( $options['module'] != '' ) {
+if($options['module']=='pay'){
+	$template       = 'user_' .$module;
+	require 'modules/user/' .$module. '.php';
+}else if ( $options['module'] != '' ) {
     $profile_menu  = $module;
     $template       = 'user_' .$module;
     require 'modules/user/' .$module. '.php';

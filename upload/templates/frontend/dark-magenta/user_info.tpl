@@ -87,8 +87,7 @@ var lang_delete_game_ask = "{t c='game.delete_confirm'}";
 					<li>{t c='user.video_watch' s=$user.username|truncate:20}: <span class="text-white">{$user.video_viewed} {if $user.video_viewed == '1'}{t c='global.time'}{else}{t c='global.times'}{/if}</span></li>
 					
 					<li>积分: <span class="text-white">{$user.score}</span></li>
-					<li>VIP: <span class="text-white">{$user.vip_level}</span></li>
-					
+					<li>会员级别: <span class="text-white">{$user.vip_level}</span> <a href="/user/pay"><span class="text-red">点卡充值</span></a></li>
 				</ul>			
 			</div>
 		</div>

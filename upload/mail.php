@@ -4,6 +4,7 @@ require 'include/config.php';
 require 'include/function_global.php';
 require 'include/function_smarty.php';
 require 'classes/auth.class.php';
+require 'include/function_user.php';
 
 $auth   = new Auth();
 $auth->check();
@@ -17,6 +18,8 @@ if ( $conn->Affected_Rows() != 1 ) {
 }
 $user       = $rs->getrows();
 $user       = $user['0'];
+
+$user['vip_level'] = getUserVipLevel($user);
 
 $sql        = "SELECT * FROM users_online WHERE UID = " .$uid. " AND online > " .(time()-300). " LIMIT 1";
 $rs     = $conn->execute($sql);

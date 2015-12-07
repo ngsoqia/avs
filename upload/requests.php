@@ -5,6 +5,7 @@ require 'include/function_global.php';
 require 'include/function_smarty.php';
 require 'classes/pagination.class.php';
 require 'classes/auth.class.php';
+require 'include/function_user.php';
 
 $auth   = new Auth();
 $auth->check();
@@ -15,6 +16,8 @@ $sql            = "SELECT * FROM signup WHERE UID = " .$uid. " LIMIT 1";
 $rs             = $conn->execute($sql);
 $user           = $rs->getrows();
 $user           = $user['0'];
+
+$user['vip_level'] = getUserVipLevel($user);
 
 $sql        = "SELECT * FROM users_online WHERE UID = " .$uid. " AND online > " .(time()-300). " LIMIT 1";
 $rs     = $conn->execute($sql);
