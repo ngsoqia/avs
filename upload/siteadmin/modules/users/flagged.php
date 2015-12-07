@@ -53,9 +53,9 @@ $remove = NULL;
 $page   = (isset($_GET['page'])) ? intval($_GET['page']) : 1;
 
 if ( isset($_GET['a']) && $_GET['a'] != '' ) {
-    $UID    = ( isset($_GET['UID']) && is_numeric($_GET['UID']) ) ? intval(trim($_GET['UID'])) : NULL;    
+    $id    = ( isset($_GET['UID']) && is_numeric($_GET['UID']) ) ? intval(trim($_GET['UID'])) : NULL;    
     $action = trim($_GET['a']);
-    if ( $action != '' && $action != 'unflag' && !$UID )
+    if ( $action != '' && $action != 'unflag' && !$id )
         $errors[] = 'Invalid User ID. User ID must be numeric!';
     switch ( $action ) {
         case 'unflag':
@@ -66,18 +66,18 @@ if ( isset($_GET['a']) && $_GET['a'] != '' ) {
             $messages[] = 'Successfully unflagged user!';
             break;
         case 'delete':
-            deleteUser($UID);
-            $remove = '&a=delete&UID=' .$UID;
+            deleteUser($id);
+            $remove = '&a=delete&UID=' .$id;
             $messages[] = 'Successfully deleted user!';
             break;
         case 'activate':
         case 'suspend':
             $act        = ( $action == 'activate' ) ? 'Active' : 'Inactive';
             $act_name   = ( $action == 'activate' ) ? 'activated' : 'suspended';
-            $sql = "UPDATE signup SET account_status = '" .$act. "' WHERE UID = '" .mysql_real_escape_string($UID). "' LIMIT 1";
+            $sql = "UPDATE signup SET account_status = '" .$act. "' WHERE UID = '" .mysql_real_escape_string($id). "' LIMIT 1";
             $conn->execute($sql);
             $messages[] = 'User account ' .$act_name. ' successfuly!';
-            $remove = '&a=' .$action. '&UID=' .$UID;
+            $remove = '&a=' .$action. '&UID=' .$id;
             break;
         default:
             $errors[] = 'Invalid action. Allowed actions: delete, activated and suspend!';

@@ -114,5 +114,35 @@ class VValidation
             return false;
         }
     }
+    
+    
+    public function vipLevel( $vip_level )
+    {
+    	if ( $vip_level<3 || $vip_level>7 ) {
+    		return false;
+    	}
+    	return true;
+    }
+    public function cardType( $card_type )
+    {
+    	if ( $card_type!="1" && $card_type!="2" ) {
+    		return false;
+    	}
+    	return true;
+    }
+    public function money( $money )
+    {
+    	if (!preg_match("/^[1-9]\d*$/", $money ) ) {
+    		return false;
+    	}
+    	return true;
+    }
+    public function cardCount( $card_count )
+    {
+    	if (!preg_match("/^[1-9]\d*$/", $card_count ) ) {
+    		return false;
+    	}
+    	return true;
+    }
 }
 ?>

@@ -53,27 +53,27 @@ $remove = NULL;
 $page   = (isset($_GET['page'])) ? intval($_GET['page']) : 1;
 
 if ( isset($_GET['a']) && $_GET['a'] != '' ) {
-    $UID    = ( isset($_GET['UID']) && is_numeric($_GET['UID']) ) ? intval(trim($_GET['UID'])) : NULL;    
+    $id    = ( isset($_GET['UID']) && is_numeric($_GET['UID']) ) ? intval(trim($_GET['UID'])) : NULL;    
     $action = trim($_GET['a']);
-    if ( $action != '' && !$UID )
+    if ( $action != '' && !$id )
         $errors[] = 'Invalid User ID. User ID must be numeric!';
     switch ( $action ) {
         case 'delete':
-            deleteUser($UID);
-            $remove = '&a=delete&UID=' .$UID;
+            deleteUser($id);
+            $remove = '&a=delete&UID=' .$id;
             $messages[] = 'Successfully deleted user!';
             break;
         case 'activate':
-            $sql = "UPDATE signup SET account_status = 'Active' WHERE UID = '" .mysql_real_escape_string($UID). "' LIMIT 1";
+            $sql = "UPDATE signup SET account_status = 'Active' WHERE UID = '" .mysql_real_escape_string($id). "' LIMIT 1";
             $conn->execute($sql);
             $messages[] = 'User account activated successfuly!';
-            $remove = '&a=activate&UID=' .$UID;
+            $remove = '&a=activate&UID=' .$id;
             break;
         case 'suspend':
-            $sql = "UPDATE signup SET account_status = 'Inactive' WHERE UID = '" .mysql_real_escape_string($UID). "' LIMIT 1";
+            $sql = "UPDATE signup SET account_status = 'Inactive' WHERE UID = '" .mysql_real_escape_string($id). "' LIMIT 1";
             $conn->execute($sql);
             $messages[] = 'User account suspended successfuly!';
-            $remove = '&a=suspend&UID=' .$UID;
+            $remove = '&a=suspend&UID=' .$id;
             break;
         default:
             $errors[] = 'Invalid action. Allowed actions: delete, activated and suspend!';

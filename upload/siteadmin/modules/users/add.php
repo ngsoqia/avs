@@ -33,7 +33,7 @@ if ( isset($_POST['add_user']) ) {
   		$errors[] = 'Email field cannot be blank!';
     } elseif ( !$valid->email($email) ) {
         $errors[] = 'Email is not a valid email address!';
-    } elseif ( $valid->emailExists($email, $UID) ) {
+    } elseif ( $valid->emailExists($email, $id) ) {
         $errors[] = 'Email is already used by another user!';
     } else {
 		$user['email'] = $email;

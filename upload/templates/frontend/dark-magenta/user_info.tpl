@@ -85,6 +85,10 @@ var lang_delete_game_ask = "{t c='game.delete_confirm'}";
 					<li>{t c='user.profile_viewed'}: <span class="text-white">{$user.profile_viewed} {if $user.profile_viewed == '1'}{t c=global.time'}{else}{t c='global.times'}{/if}</span></li>
 					<li>{t c='user.has_watched'}: <span class="text-white">{$user.watched_video} {if $user.watched_video == '1'}{t c='global.video'}{else}{t c='videos.videos'}{/if}</span></li>
 					<li>{t c='user.video_watch' s=$user.username|truncate:20}: <span class="text-white">{$user.video_viewed} {if $user.video_viewed == '1'}{t c='global.time'}{else}{t c='global.times'}{/if}</span></li>
+					
+					<li>积分: <span class="text-white">{$user.score}</span></li>
+					<li>VIP: <span class="text-white">{$user.vip_level}</span></li>
+					
 				</ul>			
 			</div>
 		</div>

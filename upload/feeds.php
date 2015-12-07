@@ -42,13 +42,13 @@ if ( $subscriptions ) {
         if ( !$conn->Affected_Rows() === 1 ) {
             VRedirect::go($config['BASE_URL']. '/error/user_missing');
         }
-        $UID                = intval($rs->fields['UID']);
-        $sql                = "SELECT SUID FROM video_subscribe WHERE UID = " .$uid. " AND SUID = " .$UID. " LIMIT 1";
+        $id                = intval($rs->fields['UID']);
+        $sql                = "SELECT SUID FROM video_subscribe WHERE UID = " .$uid. " AND SUID = " .$id. " LIMIT 1";
         $conn->execute($sql);
         if ( !$conn->Affected_Rows() === 1 ) {
             VRedirect::go($config['BASE_URL']. '/error');
         }
-        $sql_add            = " AND PREFIX.UID = " .$UID;
+        $sql_add            = " AND PREFIX.UID = " .$id;
     }
     
     $total_feeds = 0;

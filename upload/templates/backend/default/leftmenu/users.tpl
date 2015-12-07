@@ -19,4 +19,9 @@
     <ul>
         <li><a href="users.php?m=add">Add</a></li>
     </ul>
+    <h2><img src="{$relative_tpl}/images/icons/vip.png" align="absmiddle"> VIP</h2>
+    <ul>
+        <li><a href="users.php?m=card_list">点卡列表</a></li>
+        <li><a href="users.php?m=card_add">点卡添加</a></li>
+    </ul>
     </div>

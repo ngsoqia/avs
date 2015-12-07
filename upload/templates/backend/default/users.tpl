@@ -93,6 +93,9 @@
                 <td align="center"><b>Country</b></td>
                 <td align="center"><b>Join/Last Login Date</b></td>
                 <td align="center"><b>Videos</b></td>
+                <td align="center"><b>VIP Level</b></td>
+                <td align="center"><b>VIP Time</b></td>
+                <td align="center"><b>Referer Id</b></td>
                 <td align="center"><b>Status</b></td>
                 <td align="center"><b>Actions</b></td>
             </tr>
@@ -116,6 +119,11 @@
                 Viewed: {$users[i].watched_video}<br>
                 Views: {$users[i].video_viewed}<br>
                 </td>
+                <td align="center">{$users[i].vip_level}</td>
+                <td align="center">
+                	{$users[i].vip_time|date_format:'%Y-%m-%d %H:%M:%S'}
+                </td>
+                <td align="center">{$users[i].referer_id}</td>
                 <td align="center">{$users[i].account_status}</td>
                 <td align="center">
                     <a href="users.php?m=view&UID={$users[i].UID}">View</a><br>

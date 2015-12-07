@@ -40,6 +40,18 @@
                     <td>{$user[0].country}</td>
                 </tr>
                 <tr class="view">
+                    <td valign="top"><b>VIP Level</b></td>
+                    <td>{$user[0].vip_level}</td>
+                </tr>
+                <tr class="view">
+                    <td valign="top"><b>VIP Time</b></td>
+                    <td>{$user[0].vip_time}</td>
+                </tr>
+                <tr class="view">
+                    <td valign="top"><b>Referer Id</b></td>
+                    <td>{$user[0].referer_id}</td>
+                </tr>
+                <tr class="view">
                     <td valign="top"><b>Last IP</b></td>
                     <td>{$user[0].user_ip} {if $user[0].user_ip != ''}<a href="index.php?m=bans&a=add&ip={$user[0].user_ip}" onClick='Javascript:return confirm("Are you sure you want to ban this user?");'><b>Ban User</b></a>{/if}</td>
                 </tr>

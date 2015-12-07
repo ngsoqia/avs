@@ -19,7 +19,8 @@ if ( isset($_GET['msg']) ) {
 $module             = ( isset($_GET['m']) && $_GET['m'] != '' ) ? trim($_GET['m']) : 'all';
 $module_template    = 'users.tpl';
 $modules_allowed    = array('all', 'active', 'inactive', 'edit', 'view', 'view', 'mail',
-                            'mailall', 'flagged', 'spam', 'commentedit', 'comments', 'add');
+                            'mailall', 'flagged', 'spam', 'commentedit', 'comments', 'add',
+							'card_list', 'card_add');
 if ( !in_array($module, $modules_allowed) ) {
     $module = 'all';
     $err    = 'Invalid Users Module!';
@@ -37,6 +38,11 @@ switch ( $module ) {
     case 'flagged':
     case 'commentedit':
     case 'comments':
+    case 'card_add':
+        $module_template = 'users_' .$module. '.tpl';
+        break;
+    case 'card_list':
+        $module_keep        = $module;
         $module_template = 'users_' .$module. '.tpl';
         break;
     case 'all':

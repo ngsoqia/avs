@@ -72,12 +72,12 @@ if ( isset($module) ) {
 } else {
     $is_friend      = true;
     if ( $album['type'] == 'private' ) {
-        $UID = ( isset($_SESSION['uid']) ) ? intval($_SESSION['uid']) : NULL;
-        if ( $UID ) {
-            if ( $UID != $album['UID'] ) {
+        $id = ( isset($_SESSION['uid']) ) ? intval($_SESSION['uid']) : NULL;
+        if ( $id ) {
+            if ( $id != $album['UID'] ) {
                 $sql = "SELECT FID FROM friends
-                        WHERE ((UID = " .$uid. " AND FID = " .$UID. ")
-                        OR (UID = " .$UID. " AND FID = " .$uid. "))
+                        WHERE ((UID = " .$uid. " AND FID = " .$id. ")
+                        OR (UID = " .$id. " AND FID = " .$uid. "))
                         AND status = 'Confirmed'
                         LIMIT 1";
                 $conn->execute($sql);

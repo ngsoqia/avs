@@ -715,4 +715,14 @@ function insert_tmb_path($options)
 	return $output;
 }
 
+
+
+function deleteCard( $id )
+{
+	global $conn;
+	$id    = intval($id);
+	$sql    = "DELETE FROM user_card WHERE ID = " .$id. " LIMIT 1";
+	$conn->execute($sql);
+}
+
 ?>

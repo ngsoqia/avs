@@ -33,10 +33,10 @@ $album      = $album['0'];
 $uid        = intval($album['UID']);
 $is_friend  = true;
 if ( $album['type'] == 'private' ) {
-    $UID = ( isset($_SESSION['uid']) ) ? intval($_SESSION['uid']) : NULL;
-    if ( $UID ) {
-        if ( $UID != $uid ) {
-            $sql = "SELECT FID FROM friends WHERE UID = " .$uid. " AND FID = " .$UID. " AND status = 'Confirmed' LIMIT 1";
+    $id = ( isset($_SESSION['uid']) ) ? intval($_SESSION['uid']) : NULL;
+    if ( $id ) {
+        if ( $id != $uid ) {
+            $sql = "SELECT FID FROM friends WHERE UID = " .$uid. " AND FID = " .$id. " AND status = 'Confirmed' LIMIT 1";
             $conn->execute($sql);
             if ( $conn->Affected_Rows() == 0 ) {
                 $is_friend = false;
