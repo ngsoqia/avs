@@ -87,7 +87,8 @@ var lang_delete_game_ask = "{t c='game.delete_confirm'}";
 					<li>{t c='user.video_watch' s=$user.username|truncate:20}: <span class="text-white">{$user.video_viewed} {if $user.video_viewed == '1'}{t c='global.time'}{else}{t c='global.times'}{/if}</span></li>
 					
 					<li>积分: <span class="text-white">{$user.score}</span></li>
-					<li>会员级别: <span class="text-white">{$user.vip_level}</span> <a href="/user/pay"><span class="text-red">点卡充值</span></a></li>
+					<li>会员级别: <span class="text-white">{$user.vip_level}{if $user.vip_level=='1' || $user.vip_level=='2'} (普通){else} (VIP){/if}</span> <a href="/user/pay"><span class="text-red">点卡充值</span></a></li>
+					<li>会员有效期: <span class="text-white">{if $user.vip_level=='1' || $user.vip_level=='2'}永久{else}{$user.vip_time|date_format:'%Y-%m-%d'}{/if}</span></li>
 				</ul>			
 			</div>
 		</div>

@@ -45,7 +45,7 @@
                 </tr>
                 <tr class="view">
                     <td valign="top"><b>VIP Time</b></td>
-                    <td>{$user[0].vip_time}</td>
+                    <td>{$user[0].vip_time|date_format:'%Y-%m-%d %H:%M:%S'}</td>
                 </tr>
                 <tr class="view">
                     <td valign="top"><b>Referer Id</b></td>
