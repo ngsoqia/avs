@@ -60,7 +60,8 @@ if ( isset($_POST['submit_card_pay']) ) {
 					$conn->execute($sql);
 				}else if(intval($card['vip_level']) > intval($user['vip_level'])){
 					// 升级VIP，原时间折合成高级VIP时间
-					$vipTimeDlta = ($user['vip_time'] - time()) * 0.5;
+					$radio = 0.5;
+					$vipTimeDlta = ($user['vip_time'] - time()) * $radio;
 					$vipTime = $user['vip_time'];
 					if($card['card_type']==1){
 						$vipTime = time() + 30*24*60*60 + $vipTimeDlta;
@@ -71,17 +72,18 @@ if ( isset($_POST['submit_card_pay']) ) {
 					$conn->execute($sql);
 				}else if(intval($card['vip_level']) < intval($user['vip_level'])){
 					// VIP不变，充值卡时间折合成当前用户等级时间
+					$radio = 0.5;
 					$vipTimeDlta = 0;
 					if($card['card_type']==1){
-						$vipTimeDlta = 30*24*60*60 * 0.5;
+						$vipTimeDlta = 30*24*60*60 * $radio;
 					}else{
-						$vipTimeDlta = 365*24*60*60 * 0.5;
+						$vipTimeDlta = 365*24*60*60 * $radio;
 					}
 					$vipTime = $user['vip_time'] + $vipTimeDlta;
 					$sql = "UPDATE signup SET vip_time='" . $vipTime . "' WHERE UID = " .$uid;
 					$conn->execute($sql);
 				}
-				$sql = "UPDATE user_card SET used='1', user_id='" . $uid. "' where id=" . $card['id'];
+				$sql = "UPDATE user_card SET used='1', user_id='" . $uid. "', usetime='" . time() . "' where id=" . $card['id'];
 				$conn->execute($sql);
 				//$conn->RollbackTrans();
 				

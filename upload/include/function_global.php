@@ -300,4 +300,56 @@ function blog_output($content)
 	return $content;
 }
 
+function getIP() {
+	if (getenv('HTTP_CLIENT_IP')) {
+		$ip = getenv('HTTP_CLIENT_IP');
+	}
+	elseif (getenv('HTTP_X_FORWARDED_FOR')) {
+		$ip = getenv('HTTP_X_FORWARDED_FOR');
+	}
+	elseif (getenv('HTTP_X_FORWARDED')) {
+		$ip = getenv('HTTP_X_FORWARDED');
+	}
+	elseif (getenv('HTTP_FORWARDED_FOR')) {
+		$ip = getenv('HTTP_FORWARDED_FOR');
+
+	}
+	elseif (getenv('HTTP_FORWARDED')) {
+		$ip = getenv('HTTP_FORWARDED');
+	}
+	else {
+		$ip = $_SERVER['REMOTE_ADDR'];
+	}
+	return $ip;
+}
+
+
+function getMaxCount4Vip($vipLevel){
+	if($vipLevel==0){
+		return 10;
+	}
+	if($vipLevel==1){
+		return 20;
+	}
+	if($vipLevel==2){
+		return 30;
+	}
+	if($vipLevel==3){
+		return 60;
+	}
+	if($vipLevel==4){
+		return 100;
+	}
+	if($vipLevel==5){
+		return 200;
+	}
+	if($vipLevel==6){
+		return 400;
+	}
+	if($vipLevel==7){
+		return 1000;
+	}
+	return 10;
+}
+
 ?>
