@@ -55,6 +55,8 @@ if ( $module == 'read' ) {
 
 require 'modules/mail/' .$module. '.php';
 
+$smarty->assign('referer_url', $config['BASE_URL'] . "/signup?u=" . $uid);
+
 $smarty->assign('errors',$errors);
 $smarty->assign('err',$err);
 $smarty->assign('messages',$messages);

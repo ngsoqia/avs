@@ -8,6 +8,77 @@ require '../../include/function_language.php';
 require '../../include/adodb/adodb.inc.php';
 require '../../include/dbconn.php';
 require_once ('../../include/function_thumbs.php');
+if ( !defined('_CONSOLE') ) {
+	require '../../include/sessions.php';
+}
+// 判断是否可以访问
+$uid                = ( isset($_SESSION['uid']) ) ? intval($_SESSION['uid']) : NULL;
+$vidArr = explode('-',$_GET['vkey']);
+$vid = $vidArr[0];
+if(!isset($_SESSION['uid'])){
+	// 没有登录
+	$t = time();
+	$t_d = $t - ($t % (24*60*60));
+	$sql = "select count(*) as cnt from playhistory where ip='" . getIP() . "' and vid='" . $vid . "' and playtime>" . $t_d ;
+	$rs = $conn->execute($sql);
+	if ( $rs->fields['cnt'] == 0 ) {
+		$sql = "select count(*) as cnt from playhistory where ip='" . getIP() . "' and playtime>" . $t_d ;
+		$rs = $conn->execute($sql);
+		$playhisCount = $rs->fields['cnt'];
+		if(playhisCount >= 10){
+			// 游客可看10个，已经不能再看了
+			return;
+		}else{
+			$sql    = "INSERT INTO playhistory SET playtime = '" .time(). "' , vid = '" .$vid. "' , ip='". getIP() . "' ";
+			$conn->execute($sql);
+		}
+	}else{
+		// 看过该视频
+	}
+}else if(isset($_SESSION['uid']) && $uid != $video['UID']){
+	// 登录了
+	$sql    = "SELECT * FROM signup WHERE uid = '" . $uid . "' LIMIT 1";
+	$rs = $conn->execute($sql);
+	if ( $conn->Affected_Rows() != 0 ) {
+		$user   = $rs->getrows();
+		$user   = $user['0'];
+		$t = time();
+		$t_d = $t - ($t % (24*60*60));
+		$conn->StartTrans();
+		$sql = "select count(*) as cnt from playhistory where (ip='" . getIP() . "' or uid='" . $uid . "') and vid='" . $vid . "' and playtime>" . $t_d;
+		$rs = $conn->execute($sql);
+		if ( $rs->fields['cnt'] == 0 ) {
+			if($user['vip_time']>time()){
+				// VIP
+				$vipLevel = $user['vip_level'];
+			}else{
+				if($user['score']<5000){
+					// 1级
+					$vipLevel = 1;
+				}else{
+					// 2级
+					$vipLevel = 2;
+				}
+			}
+			$sql = "select count(*) as cnt from playhistory where (ip='" . getIP() . "' or uid='" . $uid . "') and playtime>" . $t_d ;
+			$rs = $conn->execute($sql);
+			$playhisCount = $rs->fields['cnt'];
+			$count = getMaxCount4Vip($vipLevel);
+			if($playhisCount>=$count){
+				// 已经不能再看了
+				return;
+			}else {
+				$sql    = "INSERT INTO playhistory SET playtime = '" .time(). "' , vid = '" .$vid. "' , ip='". getIP() . "' , uid='" . $uid . "'" ;
+				$conn->execute($sql);
+			}
+		}else{
+			// 看过该视频
+		}
+		$conn->CompleteTrans();
+	}
+}else{
+	// 查看自己上传的视频
+}
 
 $sql    = "SELECT * FROM player WHERE status = '1' LIMIT 1";
 $rs     = $conn->execute($sql);

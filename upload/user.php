@@ -139,6 +139,8 @@ if($options['module']=='pay'){
 
 $self_title = ( isset($self_title) ) ? $self_title . ' - ' .$config['site_name'] : $config['site_name'];
 
+$smarty->assign('referer_url', $config['BASE_URL'] . "/signup?u=" . $uid);
+
 $smarty->assign('errors',$errors);
 $smarty->assign('err',$err);
 $smarty->assign('messages',$messages);

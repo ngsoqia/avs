@@ -25,6 +25,10 @@ var lang_delete_game_ask = "{t c='game.delete_confirm'}";
 <script type="text/javascript" src="{$relative_tpl}/js/jquery.profile-0.2.js"></script>
 <script type="text/javascript" src="{$relative_tpl}/js/jquery.voting-user-0.1.js"></script>
 
+<script type="text/javascript" src="{$relative_tpl}/js/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="{$relative_tpl}/js/ZeroClipboard.js"></script>
+
+
 {include file='quick_jumps.tpl'}
 
 <div class="panel panel-default">
@@ -146,6 +150,20 @@ var lang_delete_game_ask = "{t c='game.delete_confirm'}";
 	</div>
 </div>
 
+{if $referer_url}
+<div class="panel panel-default">
+	<div class="panel-heading title-truncate">推广链接</div>
+	<div class="panel-body">
+        <div class="row">
+			<div class="col-sm-6"  id="send_message" style="width:100%; ">
+				<input name="sharetext" id="sharetext" readonly="readonly" value="{$referer_url}" type="text" style="width:80%; ">
+				<input type="button" value="复制" id="btn_submit" style="width:15%; color:F00; "/>
+			</div>
+        </div>
+	</div>
+</div>
+{/if}
+
 <div class="panel panel-default">
 	<div class="panel-heading title-truncate">{t c='user.CONTACT'} {$username}</div>
 	<div class="panel-body">
@@ -238,3 +256,33 @@ var lang_delete_game_ask = "{t c='game.delete_confirm'}";
 	
 	</div>
 </div>
+
+<script type="text/javascript">
+ZeroClipboard.setMoviePath( "{$relative_tpl}/js/ZeroClipboard.swf" ); 
+{literal}
+function copyToClipboard(txt,id){
+    var clip = new ZeroClipboard.Client(); // 新建一个对象
+    clip.setHandCursor( true ); // 设置鼠标为手型
+    var val=$("#"+txt).val(); //获取需要复制文本
+    clip.setText(val);       // 设置要复制的文本
+    clip.addEventListener('load', my_load);
+	clip.addEventListener('mouseOver', my_mouse_over);
+	clip.addEventListener('complete', my_complete);
+    
+    clip.glue(id);            // 和上一句位置不可调换
+}
+function my_load(client) {
+//	console.log("load");
+}
+
+function my_mouse_over(client) {
+//	clip.setText( $('fe_text').value );
+}
+
+function my_complete(client, text) {
+	alert("复制成功");
+}
+
+copyToClipboard("sharetext",'btn_submit');
+{/literal}
+</script>

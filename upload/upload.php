@@ -70,6 +70,8 @@ if ( $module == 'default' ) {
     require $config['BASE_DIR']. '/modules/upload/' .$module. '.php';
 }
 
+$smarty->assign('referer_url', $config['BASE_URL'] . "/signup?u=" . $uid);
+
 $smarty->assign('self_title', $seo['upload_title']);
 $smarty->assign('self_description', $seo['upload_desc']);
 $smarty->assign('self_keywords', $seo['upload_keywords']);
