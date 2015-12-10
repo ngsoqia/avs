@@ -157,7 +157,7 @@ var lang_delete_game_ask = "{t c='game.delete_confirm'}";
         <div class="row">
 			<div class="col-sm-6"  id="send_message" style="width:100%; ">
 				<input name="sharetext" id="sharetext" readonly="readonly" value="{$referer_url}" type="text" style="width:80%; ">
-				<input type="button" value="复制" id="btn_submit" style="width:15%; color:F00; "/>
+				<input type="button" value="复制" id="btn_submit" style="width:15%; color:#F00; "/>
 			</div>
         </div>
 	</div>
