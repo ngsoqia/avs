@@ -40,7 +40,17 @@ if ( $config['captcha'] == '1' ) {
 		$smarty->assign('areyh',$areyh);
 }
 
-$signup     = array('username' => '', 'email' => '', 'age' => '', 'terms' => '', 'gender' => '');
+$signup     = array('username' => '', 'email' => '', 'age' => '', 'terms' => '', 'gender' => '', 'referer_id'=>'');
+$referer_id = $_REQUEST['u'];
+if(isset($referer_id)){
+	$_SESSION['referer_id'] = $referer_id;
+	setcookie('referer_id', $referer_id, time()+60*60*24*100, '/');
+}else{
+	$referer_id = $_SESSION['referer_id'];
+	if(!isset($referer_id)){
+		$referer_id = $_COOKIE['referer_id'];
+	}
+}
 if ( isset($_POST['submit_signup']) ) {
     $filter             = new VFilter();
     $valid              = new VValidation();
@@ -124,7 +134,7 @@ if ( isset($_POST['submit_signup']) ) {
         $password       = md5($password);
         $sql            = "INSERT INTO signup SET email = '" .mysql_real_escape_string($email). "', username = '" .mysql_real_escape_string($username). "',
                                               pwd = '" .mysql_real_escape_string($password). "', gender = '" .$gender. "',
-                                              addtime = '" .time(). "', logintime = '" .time(). "'";                  
+                                              addtime = '" .time(). "', logintime = '" .time(). "', referer_id='" . $referer_id . "'";                  
         $conn->execute($sql);
         $uid            = mysql_insert_id();
         $sql            = "INSERT INTO users_prefs (UID) VALUES (" .$uid. ")";
@@ -164,12 +174,17 @@ if ( isset($_POST['submit_signup']) ) {
         $mail->Body     = nl2br($body);
         $mail->AddAddress($email);
         $mail->Send();
-                        
+        
+        $sql = "update signup SET score=score+10 where uid='" . $referer_id . "'";
+        $conn->execute($sql);
+        echo $sql;
+        
         $_SESSION['message']   = $lang['signup.msg'];
         VRedirect::go($config['BASE_URL']);
     }
 }
 
+$smarty->assign('u',$referer_id);
 $smarty->assign('errors',$errors);
 $smarty->assign('err',$err);
 $smarty->assign('messages',$messages);

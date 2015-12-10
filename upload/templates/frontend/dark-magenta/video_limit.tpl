@@ -1,6 +1,9 @@
 {literal}
 <style type="text/css">
 /*弹出层的STYLE*/
+body{
+	height:70%;
+}
 
 .mydiv {
 background-color: #ff6;

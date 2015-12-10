@@ -5,7 +5,7 @@
 	<div class="row">
 		<div class="col-md-6">
 		<div class="well">
-			<form class="form-horizontal" name="signup_form" id="signup_form" method="post" action="{$relative}/signup">
+			<form class="form-horizontal" name="signup_form" id="signup_form" method="post" action="{$relative}/signup?u={$u}">
 			  <fieldset>
 				<legend>{t c='signup.title' s=$site_name}</legend>
 				
