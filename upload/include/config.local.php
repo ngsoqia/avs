@@ -165,7 +165,9 @@ $config['premium_write_in_blog'] = '1';
 $config['premium_upload_video'] = '1';
 $config['max_thumb_folders'] = '32000';
 
-$config['referer_score'] = 10;
+$config['referer_signup_score'] = 10;
+$config['referer_video_score'] = 2;
+
 $config['level_2_score'] = 5000;
 $config['level_video_0'] = 10;
 $config['level_video_1'] = 20;

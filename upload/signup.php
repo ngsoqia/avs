@@ -175,12 +175,20 @@ if ( isset($_POST['submit_signup']) ) {
         $mail->AddAddress($email);
         $mail->Send();
         
-        $sql = "update signup SET score=score+" . $config['referer_score'] . " where uid='" . $referer_id . "'";
-        $conn->execute($sql);
-        echo $sql;
+        if(isset($referer_id)){	
+        	// 推广而来
+	        $sql = "select count(*) as cnt from refererhistory where ip='" . getIP() . "' and uid='" . $referer_id . "' and referertype=1 " ;
+	        $rs = $conn->execute($sql);
+	        $sql    = "INSERT INTO refererhistory SET ip = '" .getIP(). "' , uid = '" . $referer_id . "',  referertype=1, time='" . time() . "', refereduid='" . $uid . "'";
+	        $conn->execute($sql);
+	        if ( $rs->fields['cnt'] == 0 ) {
+		        $sql = "update signup SET score=score+" . $config['referer_signup_score'] . " where uid='" . $referer_id . "'";
+		        $conn->execute($sql);
+	        }
+        }
         
         $_SESSION['message']   = $lang['signup.msg'];
-        VRedirect::go($config['BASE_URL']);
+        //VRedirect::go($config['BASE_URL']);
     }
 }
 
