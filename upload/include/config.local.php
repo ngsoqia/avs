@@ -164,4 +164,21 @@ $config['premium_in_player_ads'] = '1';
 $config['premium_write_in_blog'] = '1';
 $config['premium_upload_video'] = '1';
 $config['max_thumb_folders'] = '32000';
+
+$config['referer_score'] = 10;
+$config['level_2_score'] = 5000;
+$config['level_video_0'] = 10;
+$config['level_video_1'] = 20;
+$config['level_video_2'] = 30;
+$config['level_video_3'] = 60;
+$config['level_video_4'] = 100;
+$config['level_video_5'] = 200;
+$config['level_video_6'] = 400;
+$config['level_video_7'] = 1000;
+
+$config['level_price_3'] = 45;
+$config['level_price_4'] = 60;
+$config['level_price_5'] = 75;
+$config['level_price_6'] = 95;
+
 ?>

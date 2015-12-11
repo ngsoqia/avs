@@ -175,7 +175,7 @@ if ( isset($_POST['submit_signup']) ) {
         $mail->AddAddress($email);
         $mail->Send();
         
-        $sql = "update signup SET score=score+10 where uid='" . $referer_id . "'";
+        $sql = "update signup SET score=score+" . $config['referer_score'] . " where uid='" . $referer_id . "'";
         $conn->execute($sql);
         echo $sql;
         

@@ -386,7 +386,7 @@ function deleteGame( $gid )
 }
 
 function getUserVipLevel($user){
-	if($user['vip_level'] && $user['vip_time']>time()){
+	if($user['vip_level'] && ($user['vip_time']>time() || $user['vip_level']==7)){
 		return $user['vip_level'];
 	}
 	if(intval($user['score'])<5000){

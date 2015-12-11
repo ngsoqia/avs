@@ -121,7 +121,11 @@
                 </td>
                 <td align="center">{$users[i].vip_level}</td>
                 <td align="center">
-                	{$users[i].vip_time|date_format:'%Y-%m-%d %H:%M:%S'}
+                	{if $users[i].vip_level==7}
+                		终身超级VIP
+                	{else}
+                		{$users[i].vip_time|date_format:'%Y-%m-%d %H:%M:%S'}
+                	{/if}
                 </td>
                 <td align="center">{$users[i].referer_id}</td>
                 <td align="center">{$users[i].account_status}</td>

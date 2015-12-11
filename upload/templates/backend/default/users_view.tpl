@@ -45,7 +45,13 @@
                 </tr>
                 <tr class="view">
                     <td valign="top"><b>VIP Time</b></td>
-                    <td>{$user[0].vip_time|date_format:'%Y-%m-%d %H:%M:%S'}</td>
+                    <td>
+                    	{if $user[0].vip_level==7}
+                			终身超级VIP
+                		{else}
+                    		{$user[0].vip_time|date_format:'%Y-%m-%d %H:%M:%S'}
+                    	{/if}
+                    </td>
                 </tr>
                 <tr class="view">
                     <td valign="top"><b>Referer Id</b></td>

@@ -101,7 +101,7 @@ if(!isset($_SESSION['uid'])){
 		$sql = "select count(*) as cnt from playhistory where (ip='" . getIP() . "' or uid='" . $uid . "') and vid='" . $vid . "' and playtime>" . $t_d;
 		$rs = $conn->execute($sql);
 		if ( $rs->fields['cnt'] == 0 ) {
-			if($user['vip_time']>time()){
+			if($user['vip_time']>time() || $user['vip_level']==7){
 				// VIP
 				$vipLevel = $user['vip_level'];
 			}else{
