@@ -254,7 +254,11 @@ if ($new_permisions['watch_normal_videos'] == 0) {
 }
 
 if(isset($uid)){
-	$smarty->assign('referer_url', $config['BASE_URL'] . $_SERVER['REQUEST_URI'] . "?u=" . $uid);
+	$relative1 = '';
+	$query1      = ( isset($_SERVER['QUERY_STRING']) ) ? $_SERVER['QUERY_STRING'] : NULL;
+	$request1    = str_replace($relative1, '', $_SERVER['REQUEST_URI']);
+	$request1    = str_replace('?' .$query1, '', $request1);
+	$smarty->assign('referer_url', $config['BASE_URL'] . $request1 . "?u=" . $uid);
 }
 
 $smarty->assign('errors',$errors);
