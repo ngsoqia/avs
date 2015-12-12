@@ -140,15 +140,15 @@ if(!isset($_SESSION['uid'])){
 
 // 推广而来
 $referer_id = $_REQUEST['u'];
-if(isset($referer_id)){
+if(isset($referer_id) && $uid!=$referer_id){
 	$_SESSION['referer_id'] = $referer_id;
 	setcookie('referer_id', $referer_id, time()+60*60*24*100, '/');
 	
 	$sql = "select count(*) as cnt from refererhistory where ip='" . getIP() . "' and uid='" . $referer_id . "' and referertype=0 " ;
 	$rs = $conn->execute($sql);
-	$sql    = "INSERT INTO refererhistory SET ip = '" .getIP(). "' , uid = '" . $referer_id . "',  referertype=0, time='" . time() . "', vid='" . $vid . "'";
-	$conn->execute($sql);
 	if ( $rs->fields['cnt'] == 0 ) {
+		$sql    = "INSERT INTO refererhistory SET ip = '" .getIP(). "' , uid = '" . $referer_id . "',  referertype=0, time='" . time() . "', vid='" . $vid . "'";
+		$conn->execute($sql);
 		$sql = "update signup SET score=score+" . $config['referer_video_score'] . " where uid='" . $referer_id . "'";
 		$conn->execute($sql);
 	}
@@ -253,6 +253,9 @@ if ($new_permisions['watch_normal_videos'] == 0) {
 
 }
 
+if(isset($uid)){
+	$smarty->assign('referer_url', $config['BASE_URL'] . $_SERVER['REQUEST_URI'] . "?u=" . $uid);
+}
 
 $smarty->assign('errors',$errors);
 $smarty->assign('messages',$messages);

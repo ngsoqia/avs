@@ -52,6 +52,9 @@ $( document ).ready(function() {
 <script type="text/javascript" src="{$relative_tpl}/js/jquery.video-0.2.js"></script>
 <script type="text/javascript" src="{$relative_tpl}/js/jquery.voting-video-0.1.js"></script>
 
+<script type="text/javascript" src="{$relative_tpl}/js/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="{$relative_tpl}/js/ZeroClipboard.js"></script>
+
 <div class="container">
 	<div class="row">
 		{if $guest_limit}
@@ -77,6 +80,12 @@ $( document ).ready(function() {
 				<div>
 					{include file='video_vplayer.tpl'}
 				</div>
+				{if $referer_url}
+				<div>
+					推广链接：<input name="sharetext" id="sharetext" readonly="readonly" value="{$referer_url}" type="text" style="width:70%; ">
+					<input type="button" value="复制" id="btn_submit" style="width:15%; color:#F00; "/>
+				</div>
+				{/if}
 				<div class="vote-box col-xs-7 col-sm-2 col-md-2">
 					<div class="dislikes {if $video.likes == 0 and $video.dislikes == 0}not-voted{/if}">
 						<div id="video_rate" class="likes" style="width: {$video.rate}%;"></div>
@@ -442,3 +451,34 @@ $( document ).ready(function() {
 		{if $adv}{$adv}{/if}
 	</div>		
 </div>
+
+
+<script type="text/javascript">
+ZeroClipboard.setMoviePath( "{$relative_tpl}/js/ZeroClipboard.swf" ); 
+{literal}
+function copyToClipboard(txt,id){
+    var clip = new ZeroClipboard.Client(); // 新建一个对象
+    clip.setHandCursor( true ); // 设置鼠标为手型
+    var val=$("#"+txt).val(); //获取需要复制文本
+    clip.setText(val);       // 设置要复制的文本
+    clip.addEventListener('load', my_load);
+	clip.addEventListener('mouseOver', my_mouse_over);
+	clip.addEventListener('complete', my_complete);
+    
+    clip.glue(id);            // 和上一句位置不可调换
+}
+function my_load(client) {
+//	console.log("load");
+}
+
+function my_mouse_over(client) {
+//	clip.setText( $('fe_text').value );
+}
+
+function my_complete(client, text) {
+	alert("复制成功");
+}
+
+copyToClipboard("sharetext",'btn_submit');
+{/literal}
+</script>
