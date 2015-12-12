@@ -144,7 +144,7 @@ if(isset($referer_id) && $uid!=$referer_id){
 	$_SESSION['referer_id'] = $referer_id;
 	setcookie('referer_id', $referer_id, time()+60*60*24*100, '/');
 	
-	$sql = "select count(*) as cnt from refererhistory where ip='" . getIP() . "' and uid='" . $referer_id . "' and referertype=0 " ;
+	$sql = "select count(*) as cnt from refererhistory where ip='" . getIP() . "' and uid='" . $referer_id . "' and referertype=0 and vid='" . $vid . "'";
 	$rs = $conn->execute($sql);
 	if ( $rs->fields['cnt'] == 0 ) {
 		$sql    = "INSERT INTO refererhistory SET ip = '" .getIP(). "' , uid = '" . $referer_id . "',  referertype=0, time='" . time() . "', vid='" . $vid . "'";
