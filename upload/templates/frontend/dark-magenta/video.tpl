@@ -80,12 +80,6 @@ $( document ).ready(function() {
 				<div>
 					{include file='video_vplayer.tpl'}
 				</div>
-				{if $referer_url}
-				<div>
-					推广链接：<input name="sharetext" id="sharetext" readonly="readonly" value="{$referer_url}" type="text" style="width:70%; ">
-					<input type="button" value="复制" id="btn_submit" style="width:15%; color:#F00; "/>
-				</div>
-				{/if}
 				<div class="vote-box col-xs-7 col-sm-2 col-md-2">
 					<div class="dislikes {if $video.likes == 0 and $video.dislikes == 0}not-voted{/if}">
 						<div id="video_rate" class="likes" style="width: {$video.rate}%;"></div>
@@ -137,8 +131,18 @@ $( document ).ready(function() {
 							</ul>
 						</div>				
 					</div>
-				{/if}						
+				{/if}
+				
 				<div class="clearfix"></div>
+				
+				{if $referer_url}
+				<br/>
+				<div>
+					推广链接：<input name="sharetext" id="sharetext" readonly="readonly" value="{$referer_url}" type="text" style="width:70%; ">
+					<input type="button" value="复制" id="btn_submit" style="width:15%; color:#F00; "/>
+				</div>
+				{/if}
+				
 				<div id="response_message" style="display: none;"></div>
 				{if $video_embed == '1' && $video.embed_code == '' && $is_friend}
 				<div id="embed_video_box" class="m-t-15" style="display: none;">
