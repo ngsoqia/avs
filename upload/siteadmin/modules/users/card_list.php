@@ -75,6 +75,7 @@ function constructQuery($module)
     if ( isset($_POST['search_cards']) ) {
         $option['vip_level']     = trim($_POST['vip_level']);
         $option['used']        = trim($_POST['used']);
+        $option['card_type']        = trim($_POST['card_type']);
         $option['user_id']        = trim($_POST['user_id']);
         
         if ( $option['vip_level'] != '' ) {
@@ -84,6 +85,10 @@ function constructQuery($module)
 
         if ( $option['used'] != '' ) {
             $query_option[] = $query_add. " used='".$option['used']."'";
+            $query_add      = " AND";
+        }
+        if ( $option['card_type'] != '' ) {
+            $query_option[] = $query_add. " card_type='".$option['card_type']."'";
             $query_add      = " AND";
         }
         if ( $option['user_id'] != '' ) {

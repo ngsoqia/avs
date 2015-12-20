@@ -23,6 +23,14 @@
                     <option value="1" {if $option.used == '1'} selected="selected"{/if}>已使用</option>
                     </select>
                 </td>
+                <td align="right">卡类型:</td>
+                <td>
+                    <select name="card_type">
+                    <option value="" {if $option.card_type == ''} selected="selected"{/if}>------</option>
+                    <option value="1" {if $option.card_type == '1'} selected="selected"{/if}>月卡</option>
+                    <option value="2" {if $option.card_type == '2'} selected="selected"{/if}>年卡</option>
+                    </select>
+                </td>
                 <td align="right">使用者ID:</td>
                 <td>
                     <input type="text" name="user_id" value="{if $option.user_id}{$option.user_id}{/if}"><br>
