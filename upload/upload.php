@@ -29,6 +29,16 @@ $username   = $user['username'];
 $uid    = intval($user['UID']);
 
 $user['vip_level'] = getUserVipLevel($user);
+if($user['vip_level']>=3 && $user['vip_level']<=6){
+	$user['vip_time_left'] = ($user['vip_time'] - time())/(24*60*60);
+}
+$user['max_video_count'] = $config['level_video_'.$user['vip_level']];
+$t = time();
+$t_d = $t - ($t % (24*60*60));
+$sql = "select count(*) as cnt from playhistory where (ip='" . getIP() . "' or uid='" . $uid . "') and playtime>" . $t_d;
+$rs = $conn->execute($sql);
+$user['video_count_left'] = $user['max_video_count'] - $rs->fields['cnt'];
+
 
 $sql        = "SELECT * FROM users_online WHERE UID = " .$uid. " AND online > " .(time()-300). " LIMIT 1";
 $rs     = $conn->execute($sql);

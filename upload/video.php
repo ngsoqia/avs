@@ -149,8 +149,15 @@ if(isset($referer_id) && $uid!=$referer_id){
 	if ( $rs->fields['cnt'] == 0 ) {
 		$sql    = "INSERT INTO refererhistory SET ip = '" .getIP(). "' , uid = '" . $referer_id . "',  referertype=0, time='" . time() . "', vid='" . $vid . "'";
 		$conn->execute($sql);
-		$sql = "update signup SET score=score+" . $config['referer_video_score'] . " where uid='" . $referer_id . "'";
-		$conn->execute($sql);
+		
+		$t = time();
+		$t_d = $t - ($t % (24*60*60));
+		$sql = "select count(*) as cnt from playhistory where (ip='" . getIP() . "' and uid='" . $referer_id . "') and playtime>" . $t_d;
+		$rs = $conn->execute($sql);
+		if ( $rs->fields['cnt'] == 0 ) {	// 推广者不能在今天在同一IP观看过视频
+			$sql = "update signup SET score=score+" . $config['referer_video_score'] . " where uid='" . $referer_id . "'";
+			$conn->execute($sql);
+		}
 	}
 }
 
@@ -258,7 +265,7 @@ if(isset($uid)){
 	$query1      = ( isset($_SERVER['QUERY_STRING']) ) ? $_SERVER['QUERY_STRING'] : NULL;
 	$request1    = str_replace($relative1, '', $_SERVER['REQUEST_URI']);
 	$request1    = str_replace('?' .$query1, '', $request1);
-	$smarty->assign('referer_url', $config['BASE_URL'] . $request1 . "?u=" . $uid);
+	$smarty->assign('referer_url', $config['BASE_URL'] . "/video/" . $vid . "/?u=" . $uid);
 }
 
 $smarty->assign('errors',$errors);
