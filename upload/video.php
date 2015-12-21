@@ -5,6 +5,7 @@ require 'include/function_global.php';
 require 'include/function_smarty.php';
 require 'include/function_user.php';
 require 'classes/pagination.class.php';
+require './user_vip_info.php';
 
 if ( $config['video_view'] == 'registered' ) {
     require 'classes/auth.class.php';

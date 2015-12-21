@@ -123,6 +123,17 @@
 			{/if}
 			<div class="pull-right">
 			{if isset($smarty.session.uid)}
+				<li>会员剩余时间：
+						{if $user_vip_info.vip_level=='1' || $user_vip_info.vip_level=='2'}
+							永久
+						{elseif $user_vip_info.vip_level=='7'}
+							终身超级VIP
+						{else}
+							{$user_vip_info.vip_time_left|number_format:'1'}天
+						{/if}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>
+				<li>剩余观看数：{$user_vip_info.video_count_left}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>
+				<li>可观看数：{$user_vip_info.max_video_count}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>
+				
 				<li class="dropdown">
 					<a class="dropdown-toggle"  data-toggle="dropdown" href="#">
 						<span class="visible-xs">

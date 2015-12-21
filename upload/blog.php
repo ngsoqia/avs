@@ -4,6 +4,7 @@ require 'include/config.php';
 require 'include/function_global.php';
 require 'include/function_smarty.php';
 require 'classes/pagination.class.php';
+require './user_vip_info.php';
 
 if (isset($new_permisions['write_in_blog'])) {
 	if ($new_permisions['write_in_blog'] == 0) {

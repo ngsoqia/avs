@@ -5,6 +5,7 @@ require 'include/function_global.php';
 require 'include/function_smarty.php';
 require 'classes/auth.class.php';
 require 'include/function_user.php';
+require './user_vip_info.php';
 
 $auth   = new Auth();
 $auth->check();

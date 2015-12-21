@@ -4,6 +4,7 @@ require 'include/config.php';
 require 'include/function_global.php';
 require 'include/function_smarty.php';
 require 'classes/pagination.class.php';
+require './user_vip_info.php';
 
 if ( $config['game_module'] == '0' ) {
 	VRedirect::go($config['BASE_URL']. '/error/page_invalid');

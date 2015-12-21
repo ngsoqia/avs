@@ -3,6 +3,7 @@ define('_VALID', true);
 require 'include/config.php';
 require 'include/function_global.php';
 require 'include/function_smarty.php';
+require './user_vip_info.php';
 
 $sql            = "SELECT UID, username, photo, gender FROM signup WHERE account_status = 'Active'
                    ORDER BY popularity DESC LIMIT 8";

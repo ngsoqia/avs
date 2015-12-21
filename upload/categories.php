@@ -2,6 +2,7 @@
 define('_VALID', true);
 require 'include/config.php';
 require 'include/function_smarty.php';
+require './user_vip_info.php';
 
 $s              = ( isset($_GET['s']) && ($_GET['s'] == 'a' or $_GET['s'] == 'g') ) ? $_GET['s'] : $s;
 

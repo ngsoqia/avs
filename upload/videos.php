@@ -4,6 +4,7 @@ require 'include/config.php';
 require 'include/function_global.php';
 require 'include/function_smarty.php';
 require 'classes/pagination.class.php';
+require './user_vip_info.php';
 
 $type		= ( $config['show_private_videos'] == '0' ) ? 'public' : NULL;
 $type           = ( isset($_GET['type']) && ($_GET['type'] == 'private' or $_GET['type'] == 'public') ) ? $_GET['type'] : $type;
