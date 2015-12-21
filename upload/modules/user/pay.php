@@ -100,7 +100,7 @@ if ( isset($_POST['submit_card_pay']) ) {
 							$sql = "UPDATE signup SET vip_level='" . $card['vip_level'] . "', vip_time='" . $vipTime . "' WHERE UID = " .$uid;
 							$conn->execute($sql);
 							$user['vip_time'] = $vipTime;
-							$user['vip_level'] = $card['vip_level'];
+							//$user['vip_level'] = $card['vip_level'];
 						}
 					}
 				}else if(intval($card['vip_level']) < intval($user['vip_level'])){
