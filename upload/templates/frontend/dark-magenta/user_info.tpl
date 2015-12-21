@@ -104,7 +104,7 @@ var lang_delete_game_ask = "{t c='game.delete_confirm'}";
 						{elseif $user.vip_level=='7'}
 							终身超级VIP
 						{else}
-							{$user.vip_time_left|number_format:'1'}天<br>
+							{$user.vip_time_left|number_format:'0'}天<br>
 							<!-- {$user.vip_time|date_format:'%Y-%m-%d %H:%M:%S'} -->
 						{/if}</span>
 					</li>

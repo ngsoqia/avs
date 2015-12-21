@@ -115,7 +115,7 @@ if ( isset($_POST['submit_card_pay']) ) {
 							$payDay = number_format(30*$radio,'0');
 							$vipTimeDlta = 30*24*60*60 * $radio;
 						}else{
-							$payDay = number_format(365*$radio);
+							$payDay = number_format(365*$radio,'0');
 							$vipTimeDlta = 365*24*60*60 * $radio;
 						}
 						$vipTime = $user['vip_time'] + $vipTimeDlta;
