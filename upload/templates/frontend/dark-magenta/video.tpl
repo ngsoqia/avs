@@ -53,7 +53,7 @@ $( document ).ready(function() {
 <script type="text/javascript" src="{$relative_tpl}/js/jquery.voting-video-0.1.js"></script>
 
 <script type="text/javascript" src="{$relative_tpl}/js/jquery-1.11.1.min.js"></script>
-<script type="text/javascript" src="{$relative_tpl}/js/ZeroClipboard.js"></script>
+<script type="text/javascript" src="{$relative_tpl}/js/ZeroClipboard216.min.js"></script>
 
 <div class="container">
 	<div class="row">
@@ -458,31 +458,24 @@ $( document ).ready(function() {
 
 
 <script type="text/javascript">
-ZeroClipboard.setMoviePath( "{$relative_tpl}/js/ZeroClipboard.swf" ); 
+ZeroClipboard.config( {ldelim} swfPath: "{$relative_tpl}/js/ZeroClipboard216.swf" {rdelim} );
 {literal}
-function copyToClipboard(txt,id){
-    var clip = new ZeroClipboard.Client(); // 新建一个对象
-    clip.setHandCursor( true ); // 设置鼠标为手型
-    var val=$("#"+txt).val(); //获取需要复制文本
-    clip.setText(val);       // 设置要复制的文本
-    clip.addEventListener('load', my_load);
-	clip.addEventListener('mouseOver', my_mouse_over);
-	clip.addEventListener('complete', my_complete);
-    
-    clip.glue(id);            // 和上一句位置不可调换
-}
-function my_load(client) {
-//	console.log("load");
-}
+var client = new ZeroClipboard( $('#btn_submit') );
+client.on( 'ready', function(event) {
+    // console.log( 'movie is loaded' );
+    client.on( 'copy', function(event) {
+          event.clipboardData.setData('text/plain', $("#sharetext").val());
+    } );
+    client.on( 'aftercopy', function(event) {
+          console.log('Copied text to clipboard: ' + event.data['text/plain']);
+          alert("复制成功");
+	} );
+} );
+ 
+client.on( 'error', function(event) {
+	console.log( 'ZeroClipboard error of type "' + event.name + '": ' + event.message );
+	ZeroClipboard.destroy();
+} );
 
-function my_mouse_over(client) {
-//	clip.setText( $('fe_text').value );
-}
-
-function my_complete(client, text) {
-	alert("复制成功");
-}
-
-copyToClipboard("sharetext",'btn_submit');
 {/literal}
 </script>
