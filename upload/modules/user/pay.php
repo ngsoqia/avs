@@ -96,7 +96,7 @@ if ( isset($_POST['submit_card_pay']) ) {
 								$payDay = 365;
 								$vipTime = time() + 365*24*60*60 + $vipTimeDlta;
 							}
-							$oriDay = number_format(1.0*$vipTimeDlta/(24*60*60), '1');
+							$oriDay = number_format(1.0*$vipTimeDlta/(24*60*60), '0');
 							$sql = "UPDATE signup SET vip_level='" . $card['vip_level'] . "', vip_time='" . $vipTime . "' WHERE UID = " .$uid;
 							$conn->execute($sql);
 							$user['vip_time'] = $vipTime;
@@ -112,10 +112,10 @@ if ( isset($_POST['submit_card_pay']) ) {
 						//$errors[] = $radio;
 						$vipTimeDlta = 0;
 						if($card['card_type']==1){
-							$payDay = 30*$radio;
+							$payDay = number_format(30*$radio,'0');
 							$vipTimeDlta = 30*24*60*60 * $radio;
 						}else{
-							$payDay = 365*$radio;
+							$payDay = number_format(365*$radio);
 							$vipTimeDlta = 365*24*60*60 * $radio;
 						}
 						$vipTime = $user['vip_time'] + $vipTimeDlta;
