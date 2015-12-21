@@ -15,7 +15,7 @@ if ( !defined('_CONSOLE') ) {
 $uid                = ( isset($_SESSION['uid']) ) ? intval($_SESSION['uid']) : NULL;
 $vidArr = explode('-',$_GET['vkey']);
 $vid = $vidArr[0];
-if(!isset($_SESSION['uid'])){
+if(isset($vid) && intval($vid)>0 && !isset($_SESSION['uid'])){
 	// 没有登录
 	$t = time();
 	$t_d = $t - ($t % (24*60*60));
@@ -35,7 +35,7 @@ if(!isset($_SESSION['uid'])){
 	}else{
 		// 看过该视频
 	}
-}else if(isset($_SESSION['uid']) && $uid != $video['UID']){
+}else if(isset($vid) && intval($vid)>0 && isset($_SESSION['uid']) && $uid != $video['UID']){
 	// 登录了
 	$sql    = "SELECT * FROM signup WHERE uid = '" . $uid . "' LIMIT 1";
 	$rs = $conn->execute($sql);
