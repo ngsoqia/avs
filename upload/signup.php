@@ -194,7 +194,7 @@ if ( isset($_POST['submit_signup']) ) {
         }
         
         $_SESSION['message']   = $lang['signup.msg'];
-        //VRedirect::go($config['BASE_URL']);
+        VRedirect::go($config['BASE_URL']);
     }
 }
 
