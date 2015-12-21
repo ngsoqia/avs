@@ -6,11 +6,13 @@ require $config['BASE_DIR']. '/classes/filter.class.php';
 $basedir = dirname(dirname(dirname(__FILE__)));
 $config['BASE_DIR'] 	= $basedir;
 $config['LOG_DIR'] 		= $basedir.'/tmp/logs';
+$payType = 0;		// 1: 卡级别高升级    2: 卡级别低
 
 if ( isset($_POST['submit_card_pay']) ) {
     $filter     = new VFilter();
     $card_number = $filter->get('card_number');
     $card_pass   = $filter->get('card_pass');
+    $confirmInfo = $filter->get('confirm_info');
 
     if ( $card_number == '' ) {
         $errors[]           = '请输入充值卡号！';
@@ -74,6 +76,7 @@ if ( isset($_POST['submit_card_pay']) ) {
 						$user['vip_level'] = $card['vip_level'];
 					}else{
 						// 升级VIP，原时间折合成高级VIP时间
+						$payType = 1;
 						$radio = 1.0 * $config['level_price_'.$user['vip_level']] / $config['level_price_'.$card['vip_level']];
 						$errors[] = $radio;
 						$vipTimeDlta = ($user['vip_time'] - time()) * $radio;
@@ -90,6 +93,7 @@ if ( isset($_POST['submit_card_pay']) ) {
 					}
 				}else if(intval($card['vip_level']) < intval($user['vip_level'])){
 					// VIP不变，充值卡时间折合成当前用户等级时间
+					$payType = 0;
 					$radio = 1.0 * $config['level_price_'.$card['vip_level']] / $config['level_price_'.$user['vip_level']];
 					$errors[] = $radio;
 					$vipTimeDlta = 0;
@@ -119,5 +123,8 @@ if ( isset($_POST['submit_card_pay']) ) {
     }
 }
 
+if(!isset($confirmInfo)){
+	$smarty->assign('pay_type', $payType);
+}
 $smarty->assign('card', $card);
 ?>

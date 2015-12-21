@@ -81,7 +81,6 @@ if(!isset($_SESSION['uid'])){
 			$smarty->display('footer.tpl');
 			$smarty->gzip_encode();
 			return;
-			return;
 		}else{
 			$sql    = "INSERT INTO playhistory SET playtime = '" .time(). "' , vid = '" .$vid. "' , ip='". getIP() . "' ";
 			$conn->execute($sql);
