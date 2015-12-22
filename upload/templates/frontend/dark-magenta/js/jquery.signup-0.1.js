@@ -5,7 +5,7 @@ $(document).ready(function(){
     });
     $("#check_username").click(function(event){ 
         event.preventDefault(); 
-        $.post(base_url + "/ajax/check_username", { username: $('#signup_username').val() }, 
+        $.post(relative_url + "/ajax/check_username", { username: $('#signup_username').val() }, 
             function (response) { $("#username_check_response").html(response + '<br>'); $("#username_check_response").fadeIn(); 
         }); 
     });                                                            
