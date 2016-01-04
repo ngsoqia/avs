@@ -15,6 +15,7 @@ if ( !defined('_CONSOLE') ) {
 $uid                = ( isset($_SESSION['uid']) ) ? intval($_SESSION['uid']) : NULL;
 $vidArr = explode('-',$_GET['vkey']);
 $vid = $vidArr[0];
+$canSee = true;
 if(isset($vid) && intval($vid)>0 && !isset($_SESSION['uid'])){
 	// 没有登录
 	$t = time();
@@ -27,7 +28,8 @@ if(isset($vid) && intval($vid)>0 && !isset($_SESSION['uid'])){
 		$playhisCount = $rs->fields['cnt'];
 		if(intval($playhisCount) >= 10){
 			// 游客可看10个，已经不能再看了
-			return;
+			//return;
+			$canSee = false;
 		}else{
 			$sql    = "INSERT INTO playhistory SET playtime = '" .time(). "' , vid = '" .$vid. "' , ip='". getIP() . "' ";
 			$conn->execute($sql);
@@ -66,7 +68,8 @@ if(isset($vid) && intval($vid)>0 && !isset($_SESSION['uid'])){
 			$count = getMaxCount4Vip($vipLevel);
 			if(intval($playhisCount)>=$count){
 				// 已经不能再看了
-				return;
+				//return;
+				$canSee = false;
 			}else {
 				$sql    = "INSERT INTO playhistory SET playtime = '" .time(). "' , vid = '" .$vid. "' , ip='". getIP() . "' , uid='" . $uid . "'" ;
 				$conn->execute($sql);
@@ -178,6 +181,12 @@ if ( $conn->Affected_Rows() === 1 ) {
 
 // Is HD or Not
 $HD_URL = ($hd == '1' && $_GET['a'] == '1') ? $HD_URL : '';
+
+if(!$canSee){
+	$video_id = 404;
+	$SD_URL = $config['FLVDO_URL'].'/'.'404.mp4';
+	$HD_URL = $config['HD_URL'].'/'.'404.mp4';
+}
 
 header('Content-Type: text/xml; charset=utf-8');
 header('Expires: Mon, 26 Jul 1997 05:00:00 GMT');
