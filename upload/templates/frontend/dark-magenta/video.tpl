@@ -17,6 +17,14 @@ $( document ).ready(function() {
 	eheight =  Math.round(ewidth / 1.777);
 	evdiv.css("height" , eheight);
 	
+	var vlimit = $('#popDiv');
+    var myOffset = new Object();
+    myOffset.left = vdiv.width()/2 - vlimit.width()/2;
+    myOffset.top = -vdiv.height() + 150;
+    vlimit.css('display','block');
+    vlimit.css('top', myOffset.top);
+    vlimit.css('left', myOffset.left);
+	
 	$(window).resize(function() {
 	var vwidth = $('.video-container').width();
 	vheight =  Math.round(vwidth / (video_width / video_height));
@@ -25,6 +33,15 @@ $( document ).ready(function() {
 	var evwidth = $('.video-embedded').width();
 	evheight =  Math.round(evwidth / 1.777);
 	$('.video-embedded').css("height" , evheight);	
+	
+	
+	var vlimit = $('#popDiv');
+    var myOffset = new Object();
+    myOffset.left = $('.video-container').width()/2 - vlimit.width()/2;
+    myOffset.top = -$('.video-container').height() + 150;
+    vlimit.css('top', myOffset.top);
+    vlimit.css('left', myOffset.left);
+    
 	});
 	
 	$(window).load(function() {

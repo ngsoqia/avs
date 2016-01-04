@@ -15,6 +15,9 @@
 		</center>
 	{/if}
 </div>
+{if !$canSee}
+	{include file='video_limit.tpl'}
+{/if} 
 <script type="text/javascript">
 // <![CDATA[
 var so = new SWFObject("{$baseurl}/media/player/player.swf?f={$baseurl}/media/player/config.php?vkey={$video.VID}-{$new_permisions.watch_hd_videos}-{$new_permisions.in_player_ads}", "main", "100%", "100%", "9", "#000000");

@@ -63,6 +63,7 @@ if ( $video['type'] == 'private' && $uid != $video['UID'] ) {
     }
 }
 
+$canSee = true;
 if(!isset($_SESSION['uid'])){
 	// 没有登录
 	$t = time();
@@ -73,14 +74,15 @@ if(!isset($_SESSION['uid'])){
 		$sql = "select count(*) as cnt from playhistory where ip='" . getIP() . "' and playtime>" . $t_d ;
 		$rs = $conn->execute($sql);
 		$playhisCount = $rs->fields['cnt'];
-		if($playhisCount >= 10){	
+		if(intval($playhisCount) >= 10){	
 			// 游客可看10个，已经不能再看了
+			$canSee = false;
 			$smarty->assign('showName', $user['username']);
-			$smarty->display('header.tpl');
-			$smarty->display('video_limit.tpl');
-			$smarty->display('footer.tpl');
-			$smarty->gzip_encode();
-			return;
+// 			$smarty->display('header.tpl');
+// 			$smarty->display('video_limit.tpl');
+// 			$smarty->display('footer.tpl');
+// 			$smarty->gzip_encode();
+// 			return;
 		}else{
 			$sql    = "INSERT INTO playhistory SET playtime = '" .time(). "' , vid = '" .$vid. "' , ip='". getIP() . "' ";
 			$conn->execute($sql);
@@ -117,14 +119,15 @@ if(!isset($_SESSION['uid'])){
 			$rs = $conn->execute($sql);
 			$playhisCount = $rs->fields['cnt'];
 			$count = getMaxCount4Vip($vipLevel);
-			if($playhisCount>=$count){
+			if(intval($playhisCount)>=$count){
 				// 已经不能再看了
+				$canSee = false;
 				$smarty->assign('showName', $user['username']);
-				$smarty->display('header.tpl');
-				$smarty->display('video_limit.tpl');
-				$smarty->display('footer.tpl');
-				$smarty->gzip_encode();
-				return;
+// 				$smarty->display('header.tpl');
+// 				$smarty->display('video_limit.tpl');
+// 				$smarty->display('footer.tpl');
+// 				$smarty->gzip_encode();
+// 				return;
 			}else {
 				$sql    = "INSERT INTO playhistory SET playtime = '" .time(). "' , vid = '" .$vid. "' , ip='". getIP() . "' , uid='" . $uid . "'" ;
 				$conn->execute($sql);
@@ -137,6 +140,8 @@ if(!isset($_SESSION['uid'])){
 }else{
 	// 查看自己上传的视频
 }
+
+$smarty->assign('canSee', $canSee);
 
 // 推广而来
 $referer_id = $_REQUEST['u'];

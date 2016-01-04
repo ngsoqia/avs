@@ -25,7 +25,7 @@ if(isset($vid) && intval($vid)>0 && !isset($_SESSION['uid'])){
 		$sql = "select count(*) as cnt from playhistory where ip='" . getIP() . "' and playtime>" . $t_d ;
 		$rs = $conn->execute($sql);
 		$playhisCount = $rs->fields['cnt'];
-		if(playhisCount >= 10){
+		if(intval($playhisCount) >= 10){
 			// 游客可看10个，已经不能再看了
 			return;
 		}else{
@@ -64,7 +64,7 @@ if(isset($vid) && intval($vid)>0 && !isset($_SESSION['uid'])){
 			$rs = $conn->execute($sql);
 			$playhisCount = $rs->fields['cnt'];
 			$count = getMaxCount4Vip($vipLevel);
-			if($playhisCount>=$count){
+			if(intval($playhisCount)>=$count){
 				// 已经不能再看了
 				return;
 			}else {
